@@ -1,6 +1,5 @@
 <?php
 
-
 class AbstractTable
 {
     final public function __construct(array $tab)
