@@ -27,7 +27,12 @@ class Category extends AbstractTable
      */
     public function setIdCategory(int $id_category): void
     {
-        $this->id_category = $id_category;
+        $id_category = (int)$id_category;
+        if (empty($id_category)) {
+            trigger_error('');
+        } else {
+            $this->id_category = $id_category;
+        }
     }
 
     /**
@@ -35,6 +40,12 @@ class Category extends AbstractTable
      */
     public function setNameCategory(string $name_category): void
     {
-        $this->name_category = $name_category;
+        if (empty($name_category)) {
+            trigger_error('');
+        } else if (strlen($name_category) < 5 || strlen($name_category) > 80) {
+            trigger_error('');
+        } else {
+            $this->name_category = $name_category;
+        }
     }
 }

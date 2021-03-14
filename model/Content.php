@@ -108,7 +108,12 @@ class Content extends AbstractTable
      */
     public function setIdContent(int $id_content): void
     {
-        $this->id_content = $id_content;
+        $id_content = (int)$id_content;
+        if (empty($id_content)) {
+            trigger_error('');
+        } else {
+            $this->id_content = $id_content;
+        }
     }
 
     /**
@@ -116,7 +121,13 @@ class Content extends AbstractTable
      */
     public function setNameContent(string $name_content): void
     {
-        $this->name_content = $name_content;
+        if (empty($name_content)) {
+            trigger_error('');
+        } else if (strlen($name_content) < 5 || strlen($name_content) > 50) {
+            trigger_error('');
+        } else {
+            $this->name_content = $name_content;
+        }
     }
 
     /**
@@ -124,7 +135,13 @@ class Content extends AbstractTable
      */
     public function setLinkContent(string $link_content): void
     {
-        $this->link_content = $link_content;
+        if (empty($link_content)) {
+            trigger_error('');
+        } else if (strlen($link_content) < 5 || strlen($link_content) > 255) {
+            trigger_error('');
+        } else {
+            $this->link_content = $link_content;
+        }
     }
 
     /**
@@ -132,7 +149,11 @@ class Content extends AbstractTable
      */
     public function setDescContent(string $desc_content): void
     {
-        $this->desc_content = $desc_content;
+        if (empty($desc_content)) {
+            trigger_error('');
+        } else {
+            $this->desc_content = $desc_content;
+        }
     }
 
     /**
@@ -140,7 +161,12 @@ class Content extends AbstractTable
      */
     public function setLevelContent(int $level_content): void
     {
-        $this->level_content = $level_content;
+        $level_content = (int)$level_content;
+        if (empty($level_content)) {
+            trigger_error('');
+        } else {
+            $this->level_content = $level_content;
+        }
     }
 
     /**
@@ -148,15 +174,24 @@ class Content extends AbstractTable
      */
     public function setLikeContent(int $like_content): void
     {
+        $like_content = (int)$like_content;
         $this->like_content = $like_content;
     }
 
     /**
      * @param string $date_content
+     * @throws Exception
      */
     public function setDateContent(string $date_content): void
     {
-        $this->date_content = $date_content;
+        $test_date_content = new DateTime($date_content);
+        if (empty($date_content)) {
+            trigger_error('');
+        } else if (!is_object($test_date_content)) {
+            trigger_error('');
+        } else {
+            $this->date_content = $date_content;
+        }
     }
 
     /**
@@ -164,7 +199,12 @@ class Content extends AbstractTable
      */
     public function setSubjectId(int $subject_id): void
     {
-        $this->subject_id = $subject_id;
+        $subject_id = (int)$subject_id;
+        if (empty($subject_id)) {
+            trigger_error('');
+        } else {
+            $this->subject_id = $subject_id;
+        }
     }
 
     /**
@@ -172,7 +212,12 @@ class Content extends AbstractTable
      */
     public function setUserId(int $user_id): void
     {
-        $this->user_id = $user_id;
+        $user_id = (int)$user_id;
+        if (empty($user_id)) {
+            trigger_error('');
+        } else {
+            $this->user_id = $user_id;
+        }
     }
 
     /**
@@ -180,7 +225,12 @@ class Content extends AbstractTable
      */
     public function setCategoryId(int $category_id): void
     {
-        $this->category_id = $category_id;
+        $category_id = (int)$category_id;
+        if (empty($category_id)) {
+            trigger_error('');
+        } else {
+            $this->category_id = $category_id;
+        }
     }
 
     /**
@@ -188,6 +238,11 @@ class Content extends AbstractTable
      */
     public function setFormatId(int $format_id): void
     {
-        $this->format_id = $format_id;
+        $format_id = (int)$format_id;
+        if (empty($format_id)) {
+            trigger_error('');
+        } else {
+            $this->format_id = $format_id;
+        }
     }
 }

@@ -27,7 +27,12 @@ class Role extends AbstractTable
      */
     public function setIdRole(int $id_role): void
     {
-        $this->id_role = $id_role;
+        $id_role = (int)$id_role;
+        if (empty($id_role)) {
+            trigger_error('');
+        } else {
+            $this->id_role = $id_role;
+        }
     }
 
     /**
@@ -35,6 +40,12 @@ class Role extends AbstractTable
      */
     public function setNameRole(string $name_role): void
     {
-        $this->name_role = $name_role;
+        if (empty($name_role)) {
+            trigger_error('');
+        } else if (strlen($name_role) < 5 || strlen($name_role) > 80) {
+            trigger_error('');
+        } else {
+            $this->name_role = $name_role;
+        }
     }
 }

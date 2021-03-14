@@ -27,7 +27,12 @@ class Format extends AbstractTable
      */
     public function setIdFormat(int $id_format): void
     {
-        $this->id_format = $id_format;
+        $id_format = (int)$id_format;
+        if (empty($id_format)) {
+            trigger_error('');
+        } else {
+            $this->id_format = $id_format;
+        }
     }
 
     /**
@@ -35,6 +40,12 @@ class Format extends AbstractTable
      */
     public function setNameFormat(string $name_format): void
     {
-        $this->name_format = $name_format;
+        if (empty($name_format)) {
+            trigger_error('');
+        } else if (strlen($name_format) > 5 || strlen($name_format) > 80) {
+            trigger_error('');
+        } else {
+            $this->name_format = $name_format;
+        }
     }
 }

@@ -99,7 +99,12 @@ class User extends AbstractTable
      */
     public function setIdUser(int $id_user): void
     {
-        $this->id_user = $id_user;
+        $id_user = (int)$id_user;
+        if (empty($id_user)) {
+            trigger_error('');
+        } else {
+            $this->id_user = $id_user;
+        }
     }
 
     /**
@@ -107,7 +112,13 @@ class User extends AbstractTable
      */
     public function setNameUser(string $name_user): void
     {
-        $this->name_user = $name_user;
+        if (empty($name_user)) {
+            trigger_error('');
+        } else if (strlen($name_user) < 5 || strlen($name_user) > 80) {
+            trigger_error('');
+        } else {
+            $this->name_user = $name_user;
+        }
     }
 
     /**
@@ -115,7 +126,13 @@ class User extends AbstractTable
      */
     public function setUsernameUser(string $username_user): void
     {
-        $this->username_user = $username_user;
+        if (empty($username_user)) {
+            trigger_error('');
+        } else if (strlen($username_user) < 5 || strlen($username_user) > 80) {
+            trigger_error('');
+        } else {
+            $this->username_user = $username_user;
+        }
     }
 
     /**
@@ -123,7 +140,13 @@ class User extends AbstractTable
      */
     public function setMailUser(string $mail_user): void
     {
-        $this->mail_user = $mail_user;
+        if (empty($mail_user)) {
+            trigger_error('');
+        } else if (strlen($mail_user) < 5 || strlen($mail_user) > 255) {
+            trigger_error('');
+        } else {
+            $this->mail_user = $mail_user;
+        }
     }
 
     /**
@@ -131,7 +154,13 @@ class User extends AbstractTable
      */
     public function setPseudoUser(string $pseudo_user): void
     {
-        $this->pseudo_user = $pseudo_user;
+        if (empty($pseudo_user)) {
+            trigger_error('');
+        } else if (strlen($pseudo_user) < 5 || strlen($pseudo_user) > 20) {
+            trigger_error('');
+        } else {
+            $this->pseudo_user = $pseudo_user;
+        }
     }
 
     /**
@@ -139,7 +168,13 @@ class User extends AbstractTable
      */
     public function setPasswordUser(string $password_user): void
     {
-        $this->password_user = $password_user;
+        if (empty($password_user)) {
+            trigger_error('');
+        } else if (strlen($password_user) < 5 || strlen($password_user) > 255) {
+            trigger_error('');
+        } else {
+            $this->password_user = $password_user;
+        }
     }
 
     /**
@@ -147,7 +182,13 @@ class User extends AbstractTable
      */
     public function setKeyUser(string $key_user): void
     {
-        $this->key_user = $key_user;
+        if (empty($key_user)) {
+            trigger_error('');
+        } else if (strlen($key_user) < 5 || strlen($key_user) > 255) {
+            trigger_error('');
+        } else {
+            $this->key_user = $key_user;
+        }
     }
 
     /**
@@ -155,15 +196,28 @@ class User extends AbstractTable
      */
     public function setActiveUser(int $active_user): void
     {
-        $this->active_user = $active_user;
+        $active_user = (int)$active_user;
+        if (empty($active_user)) {
+            trigger_error('');
+        } else {
+            $this->active_user = $active_user;
+        }
     }
 
     /**
      * @param string $date_user
+     * @throws Exception
      */
     public function setDateUser(string $date_user): void
     {
-        $this->date_user = $date_user;
+        $test_date_user = new DateTime($date_user);
+        if (empty($date_user)) {
+            trigger_error('');
+        } else if (!is_object($test_date_user)) {
+            trigger_error('');
+        } else {
+            $this->date_user = $date_user;
+        }
     }
 
     /**
@@ -171,6 +225,11 @@ class User extends AbstractTable
      */
     public function setRoleId(int $role_id): void
     {
-        $this->role_id = $role_id;
+        $role_id = (int)$role_id;
+        if (empty($role_id)) {
+            trigger_error('');
+        } else {
+            $this->role_id = $role_id;
+        }
     }
 }
