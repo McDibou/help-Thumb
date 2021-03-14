@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema thelp-thumb
+-- Schema help-thumb
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema thelp-thumb
+-- Schema help-thumb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `thelp-thumb` DEFAULT CHARACTER SET utf8 ;
-USE `thelp-thumb` ;
+CREATE SCHEMA IF NOT EXISTS `help-thumb` DEFAULT CHARACTER SET utf8 ;
+USE `help-thumb` ;
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_role`
+-- Table `help-thumb`.`helpthumb_role`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_role` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_role` (
   `id_role` INT NOT NULL AUTO_INCREMENT,
   `name_role` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id_role`),
@@ -26,9 +26,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_user`
+-- Table `help-thumb`.`helpthumb_user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_user` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_user` (
   `id_user` INT NOT NULL AUTO_INCREMENT,
   `name_user` VARCHAR(80) NOT NULL,
   `username_user` VARCHAR(80) NOT NULL,
@@ -46,16 +46,16 @@ CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_user` (
   UNIQUE INDEX `mail_user_UNIQUE` (`mail_user` ASC),
   CONSTRAINT `fk_user_role`
     FOREIGN KEY (`role_id`)
-    REFERENCES `thelp-thumb`.`helpthumb_role` (`id_role`)
+    REFERENCES `help-thumb`.`helpthumb_role` (`id_role`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_subject`
+-- Table `help-thumb`.`helpthumb_subject`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_subject` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_subject` (
   `id_subject` INT NOT NULL AUTO_INCREMENT,
   `name_subject` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`id_subject`),
@@ -64,9 +64,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_category`
+-- Table `help-thumb`.`helpthumb_category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_category` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_category` (
   `id_category` INT NOT NULL AUTO_INCREMENT,
   `name_category` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`id_category`),
@@ -75,9 +75,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_format`
+-- Table `help-thumb`.`helpthumb_format`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_format` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_format` (
   `id_format` INT NOT NULL AUTO_INCREMENT,
   `name_format` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`id_format`),
@@ -86,9 +86,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_content`
+-- Table `help-thumb`.`helpthumb_content`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_content` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_content` (
   `id_content` INT NOT NULL AUTO_INCREMENT,
   `name_content` VARCHAR(50) NOT NULL,
   `link_content` VARCHAR(255) NOT NULL,
@@ -108,31 +108,31 @@ CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_content` (
   INDEX `fk_content_type1_idx` (`format_id` ASC),
   CONSTRAINT `fk_content_subject1`
     FOREIGN KEY (`subject_id`)
-    REFERENCES `thelp-thumb`.`helpthumb_subject` (`id_subject`)
+    REFERENCES `help-thumb`.`helpthumb_subject` (`id_subject`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_content_user1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `thelp-thumb`.`helpthumb_user` (`id_user`)
+    REFERENCES `help-thumb`.`helpthumb_user` (`id_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_content_category1`
     FOREIGN KEY (`category_id`)
-    REFERENCES `thelp-thumb`.`helpthumb_category` (`id_category`)
+    REFERENCES `help-thumb`.`helpthumb_category` (`id_category`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_content_type1`
     FOREIGN KEY (`format_id`)
-    REFERENCES `thelp-thumb`.`helpthumb_format` (`id_format`)
+    REFERENCES `help-thumb`.`helpthumb_format` (`id_format`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_favory`
+-- Table `help-thumb`.`helpthumb_favory`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_favory` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_favory` (
   `user_id_favory` INT NOT NULL,
   `content_id_favory` INT NOT NULL,
   PRIMARY KEY (`user_id_favory`, `content_id_favory`),
@@ -140,21 +140,21 @@ CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_favory` (
   INDEX `fk_user_has_content_user1_idx` (`user_id_favory` ASC),
   CONSTRAINT `fk_user_has_content_user1`
     FOREIGN KEY (`user_id_favory`)
-    REFERENCES `thelp-thumb`.`helpthumb_user` (`id_user`)
+    REFERENCES `help-thumb`.`helpthumb_user` (`id_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_has_content_content1`
     FOREIGN KEY (`content_id_favory`)
-    REFERENCES `thelp-thumb`.`helpthumb_content` (`id_content`)
+    REFERENCES `help-thumb`.`helpthumb_content` (`id_content`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_type`
+-- Table `help-thumb`.`helpthumb_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_type` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_type` (
   `id_type` INT NOT NULL,
   `name_type` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`id_type`))
@@ -162,9 +162,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thelp-thumb`.`helpthumb_notification`
+-- Table `help-thumb`.`helpthumb_notification`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_notification` (
+CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_notification` (
   `id_notification` INT NOT NULL AUTO_INCREMENT,
   `date_notification` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `read_notification` TINYINT NOT NULL,
@@ -177,17 +177,17 @@ CREATE TABLE IF NOT EXISTS `thelp-thumb`.`helpthumb_notification` (
   INDEX `fk_notification_type1_idx` (`type_id` ASC),
   CONSTRAINT `fk_notification_user1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `thelp-thumb`.`helpthumb_user` (`id_user`)
+    REFERENCES `help-thumb`.`helpthumb_user` (`id_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_notification_content1`
     FOREIGN KEY (`content_idt`)
-    REFERENCES `thelp-thumb`.`helpthumb_content` (`id_content`)
+    REFERENCES `help-thumb`.`helpthumb_content` (`id_content`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_notification_type1`
     FOREIGN KEY (`type_id`)
-    REFERENCES `thelp-thumb`.`helpthumb_type` (`id_type`)
+    REFERENCES `help-thumb`.`helpthumb_type` (`id_type`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
