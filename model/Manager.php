@@ -1,7 +1,6 @@
 <?php
 
-
-class AbstractManager
+class Manager
 {
     protected Database $db;
 
@@ -53,12 +52,19 @@ class AbstractManager
         $this->query('DELETE FROM ' . $this->table . ' WHERE ' . $where . ' =? ', $id);
     }
 
-    public function select($where = null, $id = null, $one = false)
+    public function select($select = '*', $join = null, $where = null, $id = null, $one = false)
     {
+        $sql_join = '';
+        if (!empty($join)) {
+            foreach ($join as $field) {
+                $sql_join .= ' JOIN helpthumb_' . $field . ' ON id_' . $field . ' = ' . $this->table . '.' . $field . '_id ';
+            }
+        }
+
         if (empty($where)) {
-            return $this->query('SELECT * FROM ' . $this->table);
+            return $this->query('SELECT ' . $select . ' FROM ' . $this->table . ' ' . $sql_join);
         } else {
-            return $this->query('SELECT * FROM ' . $this->table . ' WHERE ' . $where . ' =? ', $id, $one);
+            return $this->query('SELECT ' . $select . ' FROM ' . $this->table . ' ' . $sql_join . ' WHERE ' . $where . ' =? ', $id, $one);
         }
     }
 }

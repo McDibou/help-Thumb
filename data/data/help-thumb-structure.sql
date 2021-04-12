@@ -155,9 +155,10 @@ ENGINE = InnoDB;
 -- Table `help-thumb`.`helpthumb_type`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_type` (
-  `id_type` INT NOT NULL,
+  `id_type` INT NOT NULL AUTO_INCREMENT,
   `name_type` VARCHAR(80) NOT NULL,
-  PRIMARY KEY (`id_type`))
+  PRIMARY KEY (`id_type`),
+  UNIQUE INDEX `name_type_UNIQUE` (`name_type` ASC))
 ENGINE = InnoDB;
 
 
@@ -169,11 +170,11 @@ CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_notification` (
   `date_notification` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `read_notification` TINYINT NOT NULL,
   `user_id` INT NOT NULL,
-  `content_idt` INT NOT NULL,
+  `content_id` INT NOT NULL,
   `type_id` INT NOT NULL,
   PRIMARY KEY (`id_notification`),
   INDEX `fk_notification_user1_idx` (`user_id` ASC),
-  INDEX `fk_notification_content1_idx` (`content_idt` ASC),
+  INDEX `fk_notification_content1_idx` (`content_id` ASC),
   INDEX `fk_notification_type1_idx` (`type_id` ASC),
   CONSTRAINT `fk_notification_user1`
     FOREIGN KEY (`user_id`)
@@ -181,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `help-thumb`.`helpthumb_notification` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_notification_content1`
-    FOREIGN KEY (`content_idt`)
+    FOREIGN KEY (`content_id`)
     REFERENCES `help-thumb`.`helpthumb_content` (`id_content`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
